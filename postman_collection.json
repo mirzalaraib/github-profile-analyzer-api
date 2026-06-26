@@ -119,9 +119,9 @@
   "variable": [
     {
       "key": "base_url",
-      "value": "http://localhost:3000",
+      "value": "https://github-profile-analyzer-api-9rq8.onrender.com",
       "type": "string",
-      "description": "Base URL for the API (change to deployed URL in production)"
+      "description": "Base URL for the API"
     }
   ]
 }
