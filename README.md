@@ -169,7 +169,7 @@ node test_api.js
 
 ### Deployed API
 
-Live URL: `https://github-profile-analyzer-api.onrender.com`
+Live URL: `https://github-profile-analyzer-api-9rq8.onrender.com`
 
 ## Test Results
 
