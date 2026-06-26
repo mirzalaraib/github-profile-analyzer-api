@@ -1,0 +1,26 @@
+# Environment variables
+.env
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Server logs
+server.log
+server_error.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# MySQL database data directory
+database/
+
+# Package lock
+package-lock.json
