@@ -1,0 +1,127 @@
+{
+  "info": {
+    "name": "GitHub Profile Analyzer API",
+    "description": "API collection for testing the GitHub Profile Analyzer backend service",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Analyze & Store Profile",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"username\": \"octocat\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/profiles",
+          "host": ["{{base_url}}"],
+          "path": ["api", "profiles"]
+        },
+        "description": "Fetches GitHub profile data, calculates insights, and stores in MySQL"
+      },
+      "response": [
+        {
+          "name": "Success (201)",
+          "status": "Created",
+          "code": 201,
+          "body": "{\n  \"success\": true,\n  \"message\": \"Profile analyzed and saved successfully\",\n  \"data\": {\n    \"username\": \"octocat\",\n    \"name\": \"The Octocat\",\n    \"followers\": 23081,\n    \"public_repos\": 8,\n    \"total_stars\": 21605,\n    \"total_forks\": 165088,\n    \"languages\": {\"CSS\": 1, \"HTML\": 1, \"Ruby\": 1}\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "List All Profiles",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/profiles",
+          "host": ["{{base_url}}"],
+          "path": ["api", "profiles"],
+          "query": [
+            {
+              "key": "sortBy",
+              "value": "followers",
+              "description": "Sort field: created_at, followers, public_repos, total_stars, username"
+            },
+            {
+              "key": "order",
+              "value": "DESC",
+              "description": "Sort order: ASC or DESC"
+            },
+            {
+              "key": "search",
+              "value": "",
+              "description": "Search by username or name"
+            }
+          ]
+        },
+        "description": "Returns a list of all stored analyzed profiles"
+      },
+      "response": [
+        {
+          "name": "Success (200)",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"success\": true,\n  \"message\": \"Retrieved stored analyzed profile list successfully\",\n  \"data\": [\n    {\n      \"id\": 1,\n      \"username\": \"octocat\",\n      \"name\": \"The Octocat\",\n      \"public_repos\": 8,\n      \"followers\": 23081,\n      \"total_stars\": 21605,\n      \"created_at\": \"2026-06-27T00:52:46.000Z\"\n    }\n  ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get Single Profile",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/profiles/octocat",
+          "host": ["{{base_url}}"],
+          "path": ["api", "profiles", "octocat"]
+        },
+        "description": "Returns full analysis details for a specific username"
+      },
+      "response": [
+        {
+          "name": "Success (200)",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"success\": true,\n  \"message\": \"Retrieved profile analysis details successfully\",\n  \"data\": {\n    \"id\": 1,\n    \"username\": \"octocat\",\n    \"name\": \"The Octocat\",\n    \"followers\": 23081,\n    \"public_repos\": 8,\n    \"total_stars\": 21605,\n    \"languages\": {\"CSS\": 1, \"HTML\": 1, \"Ruby\": 1}\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "Delete Profile",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/api/profiles/octocat",
+          "host": ["{{base_url}}"],
+          "path": ["api", "profiles", "octocat"]
+        },
+        "description": "Deletes a profile analysis record from the database"
+      },
+      "response": [
+        {
+          "name": "Success (200)",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"success\": true,\n  \"message\": \"Profile for username 'octocat' deleted successfully\"\n}"
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string",
+      "description": "Base URL for the API (change to deployed URL in production)"
+    }
+  ]
+}
